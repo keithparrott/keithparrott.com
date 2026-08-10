@@ -1,8 +1,7 @@
 ---
 title: "Test Post"
-description: "Testing that I can actually post "
+description: "Testing that I can actually post"
 pubDate: 2026-08-01
-tags: 
 ---
 
 Well, here you go.
