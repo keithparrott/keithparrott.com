@@ -27,15 +27,6 @@ Fields:
 
 The URL is derived from the filename, so `src/content/blog/my-post.md` becomes `/blog/my-post/`.
 
-## Before you deploy
-
-Update the placeholder domain in two spots:
-
-- `astro.config.mjs` — `site: 'https://example.com'`
-- `src/consts.ts` — `SITE_URL`
-
-These are used for the RSS feed and canonical links, so they should match your real domain.
-
 Also edit the bio text in `src/pages/index.astro` — it's a placeholder.
 
 ## Commands
@@ -47,8 +38,20 @@ Also edit the bio text in `src/pages/index.astro` — it's a placeholder.
 | `npm run build`     | Build the production site to `./dist/`        |
 | `npm run preview`   | Preview the production build locally          |
 
-## Deploying
+## Deploying (GitHub Pages)
 
-`npm run build` produces a static `dist/` folder that can be hosted anywhere
-(Netlify, Vercel, GitHub Pages, Cloudflare Pages, or any static file host).
-No server or database required.
+Site domain: `www.keithparrott.com`.
+
+Deploys automatically via `.github/workflows/deploy.yml` on every push to
+`main`. One-time setup, in the GitHub repo's **Settings → Pages**:
+
+1. Under "Build and deployment", set **Source** to "GitHub Actions".
+2. Under "Custom domain", enter `www.keithparrott.com` and save (this writes
+   the same value already committed in `public/CNAME`).
+3. At your DNS provider, add a `CNAME` record: `www` → `<github-username>.github.io`.
+4. Once DNS propagates, check "Enforce HTTPS" in the same Pages settings page.
+
+If you also want the bare `keithparrott.com` (no `www`) to work, add `A`
+records for the apex domain pointing at GitHub Pages' IPs
+(185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153), or set
+up a redirect at your registrar.
